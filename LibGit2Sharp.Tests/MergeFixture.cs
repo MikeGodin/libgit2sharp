@@ -454,16 +454,7 @@ namespace LibGit2Sharp.Tests
 
                 Branch branchToMerge = repo.Branches["rename"];
 
-                // TODO: libgit2 should provide reasonable defaults,
-                //       but it currently does not.
-                MergeOptions options = new MergeOptions()
-                {
-                    FindRenames = true,
-                    RenameThreshold = 50,
-                    TargetLimit = 200
-                };
-
-                MergeResult result = repo.Merge(branchToMerge, Constants.Signature, options);
+                MergeResult result = repo.Merge(branchToMerge, Constants.Signature);
 
                 Assert.Equal(MergeStatus.NonFastForward, result.Status);
             }

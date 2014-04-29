@@ -252,10 +252,11 @@ namespace LibGit2Sharp
         }
 
         /// <summary>
-        /// Checkout the tip commit of this <see cref="Branch"/> object
-        /// with a callback for progress reporting. If this commit is the
-        /// current tip of the branch, will checkout the named branch. Otherwise,
-        /// will checkout the tip commit as a detached HEAD.
+        /// Checkout the tip commit of this <see cref="Branch"/> object with
+        /// <see cref="CheckoutOptions"/> parameter specifying checkout
+        /// behavior. If this commit is the current tip of the branch, will
+        /// checkout the named branch. Otherwise, will checkout the tip
+        /// commit as a detached HEAD.
         /// </summary>
         /// <param name="options"><see cref="CheckoutOptions"/> controlling checkout behavior.</param>
         /// <param name="signature">Identity for use when updating the reflog.</param>

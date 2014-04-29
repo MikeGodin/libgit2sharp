@@ -10,12 +10,22 @@ namespace LibGit2Sharp
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MergeOptions"/> class.
-        /// By default, a fast-forward merge will be performed if possible, and
-        /// if a merge commit is created, then it will be commited.
+        /// <para>
+        ///   Default behavior:
+        ///     A fast-forward merge will be performed if possible.
+        ///     A merge commit will be committed, if one was created.
+        ///     Merge will attempt to find renames.
+        /// </para>
         /// </summary>
         public MergeOptions()
         {
             CommitOnSuccess = true;
+
+            FindRenames = true;
+            // TODO: libgit2 should provide reasonable defaults for these
+            //       values, but it currently does not.
+            RenameThreshold = 50;
+            TargetLimit = 200;
         }
 
         /// <summary>
@@ -37,12 +47,12 @@ namespace LibGit2Sharp
         public FastForwardStrategy FastForwardStrategy { get; set; }
 
         /// <summary>
-        /// How Checkout should handle writing out conflicting index entries.
+        /// How conflicting index entries should be written out during checkout.
         /// </summary>
         public CheckoutFileConflictStrategy FileConflictStrategy { get; set; }
 
         /// <summary>
-        /// Should merge find renames.
+        /// Find renames. Default is true.
         /// </summary>
         public bool FindRenames { get; set; }
 
@@ -63,12 +73,12 @@ namespace LibGit2Sharp
         public MergeFileFavor MergeFileFavor { get; set; }
 
         /// <summary>
-        /// Delegate that checkout progress will be reported through.
+        /// Delegate that the checkout will report progress through.
         /// </summary>
         public CheckoutProgressHandler OnCheckoutProgress { get; set; }
 
         /// <summary>
-        /// Delegate through which checkout will notify callers of
+        /// Delegate that checkout will notify callers of
         /// certain conditions. The conditions that are reported is
         /// controlled with the CheckoutNotifyFlags property.
         /// </summary>
@@ -125,7 +135,7 @@ namespace LibGit2Sharp
     {
         /// <summary>
         /// When a region of a file is changed in both branches, a conflict
-        /// will be recorded in the index so that `git_checkout` can produce
+        /// will be recorded in the index so that the checkout operation can produce
         /// a merge file with conflict markers in the working directory.
         /// This is the default.
         /// </summary>

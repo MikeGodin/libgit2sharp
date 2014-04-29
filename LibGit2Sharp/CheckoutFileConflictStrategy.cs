@@ -12,9 +12,11 @@ namespace LibGit2Sharp
     public enum CheckoutFileConflictStrategy
     {
         /// <summary>
-        /// Use the default behavior for handling file conflicts.
+        /// Use the default behavior for handling file conflicts. This is
+        /// controlled by the merge.conflictstyle config option, and is "Merge"
+        /// if no option is explicitly set.
         /// </summary>
-        Default,
+        Normal,
 
         /// <summary>
         /// For conflicting files, checkout the "ours" (stage 2)  version of
